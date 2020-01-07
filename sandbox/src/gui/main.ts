@@ -1,7 +1,7 @@
-import weblink from '~/platform/browser-io'
+import weblink from '~/platform/weblink'
 
 void async function main() {
-  const worker = new Worker('/worker.js');
+  const worker = new Worker('/dist/worker.js');
   const bus = weblink.fromWindow()
 
   bus.onConnection.subscribe(c => {

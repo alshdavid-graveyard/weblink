@@ -1,7 +1,7 @@
-import { browserIO } from '~/platform/browser-io'
+import weblink from '~/platform/weblink'
 
 void async function main() {
-  const bus = browserIO.fromWorker()
+  const bus = weblink.fromWorker()
 
   bus.onConnection.subscribe(c => {
     c.onMessage.subscribe(console.warn)

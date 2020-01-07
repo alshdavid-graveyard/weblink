@@ -1,12 +1,12 @@
-const path = require("path")
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin
+const path = require('path')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const fs = require('fs-extra')
 
 const environments = {
-  prod: "production",
-  dev: "development"
+  prod: 'production',
+  dev: 'development'
 }
-const mode = process.argv.includes("--prod")
+const mode = process.argv.includes('--prod')
   ? environments.prod
   : environments.dev
 
@@ -14,7 +14,7 @@ if (mode === environments.prod) {
   process.env.NODE_ENV = environments.prod
 }
 
-const statsPlugin = process.argv.includes("--stats")
+const statsPlugin = process.argv.includes('--stats')
   ? [new BundleAnalyzerPlugin()]
   : []
 
@@ -33,29 +33,29 @@ function getDirectories(path){
 
 module.exports = {
   entry: {
-    'index': path.join(__dirname, "/src/cmd/gui/main.ts"),
-    'worker': path.join(__dirname, "/src/cmd/worker/main.ts"),
-    'client': path.join(__dirname, "/src/cmd/client/main.ts"),
-    'frame': path.join(__dirname, "/src/cmd/frame/main.ts")
+    'index': path.join(__dirname, 'sandbox/src/gui/main.ts'),
+    'worker': path.join(__dirname, 'sandbox/src/worker/main.ts'),
+    'client': path.join(__dirname, 'sandbox/src/client/main.ts'),
+    'frame': path.join(__dirname, 'sandbox/src/frame/main.ts')
   },
   mode,
   output: {
-    path: path.join(__dirname, "static"),
-    filename: "[name].js",
+    path: path.join(__dirname, 'sandbox', 'static'),
+    filename: 'dist/[name].js',
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        loader: "ts-loader",
+        loader: 'ts-loader',
         exclude: /node_modules/
       }
     ]
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
+    extensions: ['.tsx', '.ts', '.js'],
     alias: {
-      '~': path.resolve('./src')
+      '~/platform': path.resolve('./lib'),
     }
   },
   plugins: [

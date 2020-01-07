@@ -1,0 +1,12 @@
+{
+    "files.exclude": {
+        ".gitignore": true,
+        ".vscode": true,
+        "makefile": true,
+        "node_modules": true,
+        "package.json": true,
+        "tsconfig.json": true,
+        "webpack.config.js": true,
+        "yarn.lock": true
+    }
+}

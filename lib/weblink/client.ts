@@ -2,12 +2,12 @@ import { fromEvent, ReplaySubject } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { sleep } from '../sleep';
 import { Connection } from './connection';
-import { ChannelEvent, ChannelPort, EventListenerAdderRemover, OriginPostMessenger, defaultBrokerID } from './interfaces';
+import { ChannelEvent, ChannelPort, EventListenerAdderRemover, PostMessenger, defaultBrokerID } from './interfaces';
 import { Message } from './message';
 import { MessageType } from './message-type';
 
 export interface ClientOptions {
-  bus: OriginPostMessenger;
+  bus: PostMessenger;
   retryTimeout?: number;
   selfListener: EventListenerAdderRemover;
   brokerID?: number;
@@ -16,7 +16,7 @@ export interface ClientOptions {
 export class Client {
   public onConnection = new ReplaySubject<Connection>(1);
   private port2: ChannelPort | undefined;
-  private broker: OriginPostMessenger;
+  private broker: PostMessenger;
   private retryTimeout: number;
   private selfListener: EventListenerAdderRemover;
   private brokerID: number = defaultBrokerID
