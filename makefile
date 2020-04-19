@@ -1,8 +1,34 @@
+default: clean build
+
+clean:
+	rm -r -f dist .temp
+
 build:
-	npx webpack
+	cd cmd/weblink && \
+	pack bundle \
+		--prod \
+		--ts-config ./tsconfig.json \
+		--out ../../dist
 
-watch:
-	npx webpack --watch
+stats:
+	make clean
+	cd cmd/weblink && \
+	pack bundle \
+		--prod \
+		--ts-config ./tsconfig.json \
+		--out ../../dist \
+		--stats
 
-serve:
-	npx http-server sandbox/static
+sandbox:
+	cd testing/sandbox && \
+	pack bundle \
+		--prod \
+		--ts-config ./tsconfig.json \
+		--out ../../.temp \
+		--watch
+
+dev:
+	make clean
+	npx concurrently --kill-others \
+		"make sandbox" \
+		"npx http-server .temp"

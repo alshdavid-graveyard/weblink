@@ -1,0 +1,19 @@
+{
+  "name": "@alshdavid/weblink",
+  "version": "1.0.0",
+  "description": "Connect to anything that accepts a postMessage",
+  "main": "index.js",
+  "author": "David Alsh",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alshdavid/weblink"
+  },
+  "bugs": {
+    "url": "https://github.com/ReactiveX/RxJS/issues"
+  },
+  "homepage": "https://github.com/ReactiveX/RxJS",
+  "license": "MIT",
+  "dependencies": {
+    "rxjs": "^6.5.5"
+  }
+}

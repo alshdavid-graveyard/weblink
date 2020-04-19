@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "jsx": "react",
+    "jsxFactory": "React.createElement",
     "module": "es2015",
     "moduleResolution": "node",
     "lib": ["ESNext", "DOM"],
@@ -7,6 +9,10 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "strict": true,
-    "baseUrl": "./"
+    "baseUrl": "./",
+    "paths": {
+      "@alshdavid/weblink": ["../../cmd/weblink/index"],
+      "~/*": ["../../*"]
+    }
   }
 }
