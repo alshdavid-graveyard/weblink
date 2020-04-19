@@ -2,6 +2,7 @@
   "private": true,
   "workspaces": [
     "./cmd/weblink",
+    "./cmd/extension",
     "./testing/sandbox"
   ]
 }

@@ -1,6 +1,8 @@
 import { fromEvent, Observable } from 'rxjs';
 import { filter, first, map } from 'rxjs/operators';
 import { Message } from './message';
+import { strings } from '../../platform/strings';
+import { extension } from '../../platform/extension';
 import { MessageType } from './message-type';
 import { ChannelEvent, ChannelPort, Connection } from './types';
 
@@ -8,6 +10,8 @@ export class PortConnection implements Connection {
   public onMessage: Observable<any>;
   public onReady: Promise<void>;
   private onEvent: Observable<ChannelEvent>;
+  public readonly id = strings.random(10)
+  private recipientId: string | undefined
 
   constructor(
     private port: ChannelPort,
@@ -16,7 +20,7 @@ export class PortConnection implements Connection {
     this.onReady = this.onEvent
       .pipe(first(portEvent => portEvent.data.type === MessageType.LISTENING))
       .toPromise()
-      .then(() => { /* ts-ignore */});
+      .then((ev) => this.recipientId = ev.data.payload.id);
 
     this.onMessage = this.onEvent
       .pipe(
@@ -35,5 +39,10 @@ export class PortConnection implements Connection {
     await this.onReady;
     const msg = new Message(MessageType.DATA, data);
     this.port.postMessage(msg);
+    extension.triggerWeblinkEvent({ 
+      from: this.id,
+      to: this.recipientId!,
+      body: msg,
+    })
   }
 }

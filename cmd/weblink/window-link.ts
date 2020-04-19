@@ -51,7 +51,7 @@ export class WindowLink {
       && event.data.payload.ID === (this.options.ID || defaultID);
   }
 
-  private handshake = async (event: ChannelEvent) => {
+  private handshake = async (event: any) => {
     const connectionID: string = strings.random(20);
 
     const channel = new this.options.channelConstructor();
@@ -59,22 +59,26 @@ export class WindowLink {
 
     const connection = new PortConnection(port1);
 
-    if (!event.source) {
-      return;
+    if (event.source) {
+      event.source.postMessage(
+        new Message(MessageType.PORT_TRANSFER),
+        this.options.targetOrigin,
+        [port2],
+      );
+    } else {
+      ;(this.options.selfEventSource as any).postMessage(
+        new Message(MessageType.PORT_TRANSFER),
+        [port2]
+      )
     }
 
-    event.source.postMessage(
-      new Message(MessageType.PORT_TRANSFER),
-      this.options.targetOrigin,
-      [port2],
-    );
 
     await connection.onReady;
 
     this.connections[connectionID] = connection;
     this.onConnectionSubject.next(connection);
 
-    port1.postMessage(new Message(MessageType.LISTENING));
+    port1.postMessage(new Message(MessageType.LISTENING, { id: connection.id }));
   }
 }
 

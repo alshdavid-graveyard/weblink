@@ -8,7 +8,7 @@ build:
 	pack bundle \
 		--prod \
 		--ts-config ./tsconfig.json \
-		--out ../../dist
+		--out ../../dist/weblink
 
 stats:
 	make clean
@@ -16,7 +16,7 @@ stats:
 	pack bundle \
 		--prod \
 		--ts-config ./tsconfig.json \
-		--out ../../dist \
+		--out ../../dist/weblink \
 		--stats
 
 sandbox:
@@ -27,8 +27,26 @@ sandbox:
 		--out ../../.temp \
 		--watch
 
+extension:
+	rm -r -f ./dist/extension
+	mkdir -p ./dist/extension
+	cp -r ./cmd/extension/static/* ./dist/extension
+	npx concurrently \
+		"cd cmd/extension/content && pack bundle --out ../../../dist/extension/content --prod" \
+		"cd cmd/extension/devtools && pack bundle --out ../../../dist/extension/devtools --prod" \
+		"cd cmd/extension/panel && pack bundle --out ../../../dist/extension/panel --prod"
+
+dev-extension:
+	rm -r -f ./dist/extension
+	mkdir -p ./dist
+	cp -r ./cmd/extension/static ./dist/extension
+	npx concurrently \
+		"cd cmd/extension/content && pack bundle --out ../../../dist/extension/content --prod --watch" \
+		"cd cmd/extension/devtools && pack bundle --out ../../../dist/extension/devtools --prod --watch" \
+		"cd cmd/extension/panel && pack bundle --out ../../../dist/extension/panel --prod --watch"
+
 dev:
-	make clean
+	rm -r -f .temp
 	npx concurrently --kill-others \
 		"make sandbox" \
 		"npx http-server .temp"

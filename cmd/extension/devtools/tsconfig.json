@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "lib": ["DOM", "ESNext"],
+    "moduleResolution": "node",
+    "target": "ES6",
+    "outDir": "static",
+    "baseUrl": "./",
+    "paths": {
+      "~/*": ["../../../*"]
+    }
+  }
+}

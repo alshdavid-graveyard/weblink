@@ -31,7 +31,7 @@ export const connect = async ({
     while (port2 === undefined) {
       target.postMessage(
         new Message(MessageType.READY_FOR_PORT, { ID: targetID }),
-        targetOrigin,
+        // targetOrigin,
       );
       await time.sleep(retryTimeout);
     }
@@ -42,7 +42,7 @@ export const connect = async ({
 
   const connection = new PortConnection(port2);
 
-  port2.postMessage(new Message(MessageType.LISTENING));
+  port2.postMessage(new Message(MessageType.LISTENING, { id: connection.id }));
 
   return connection;
 };

@@ -1,0 +1,15 @@
+.component-flex {
+  display: flex;
+
+  &.vertical {
+    align-items: center;
+  }
+
+  &.horizontal {
+    justify-content: center;
+  }
+}
+
+.component-content {
+  padding: 0 12px 12px;
+}
