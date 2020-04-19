@@ -1,5 +1,10 @@
 import { DebugEvent, DebugEventType, WEBLINK_DEBUG, WEBLINK_DEBUG_READY } from '~/platform/extension'
 import { SUPPORT_SCRIPTS } from './lib/support_scripts'
+import { stdom } from '../../../platform/stdom'
+
+console.log({
+  worker: stdom.ENVIRONMENT_IS_WORKER
+})
 
 const sendMessage = (event: DebugEvent) => chrome.runtime.sendMessage(event)
 

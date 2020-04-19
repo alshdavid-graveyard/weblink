@@ -14,7 +14,6 @@ export const loadWorker = async () => {
   })
 
   link.onConnection.subscribe(conn => {
-    console.log('connected')
     conn.onMessage.subscribe(msg => console.log({ to, msg }))
     conn.send('Marco!')
   })

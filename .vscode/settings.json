@@ -1,14 +1,14 @@
 {
     "files.exclude": {
-        ".gitignore": true,
-        ".vscode": true,
-        "dist": true,
-        "LICENSE": true,
-        "package.json": true,
-        "**/node_modules": true,
-        "**/tsconfig.json": true,
-        "webpack.config.js": true,
-        ".temp": true,
-        "yarn.lock": true
+        ".gitignore": false,
+        ".vscode": false,
+        "dist": false,
+        "LICENSE": false,
+        "package.json": false,
+        "**/node_modules": false,
+        "**/tsconfig.json": false,
+        "webpack.config.js": false,
+        ".temp": false,
+        "yarn.lock": false
     }
 }

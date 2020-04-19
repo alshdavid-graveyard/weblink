@@ -22,7 +22,6 @@ stats:
 sandbox:
 	cd testing/sandbox && \
 	pack bundle \
-		--prod \
 		--ts-config ./tsconfig.json \
 		--out ../../.temp \
 		--watch

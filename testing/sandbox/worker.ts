@@ -3,8 +3,6 @@ import { stdom } from '~/platform/stdom'
 
 const to = 'worker'
 
-self.addEventListener('message', console.log)
-
 const link = new weblink.WindowLink({
   targetOrigin: '*',
   ID: 80,
