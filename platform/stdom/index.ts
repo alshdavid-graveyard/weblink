@@ -1,1 +1,0 @@
-export * as stdom from './index.barrel'

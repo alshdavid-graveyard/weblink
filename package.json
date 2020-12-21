@@ -1,8 +1,7 @@
 {
-  "private": true,
+  "name": "@alshdavid/weblink",
+  "private": "true",
   "workspaces": [
-    "./cmd/weblink",
-    "./cmd/extension",
-    "./testing/sandbox"
+    "packages/*"
   ]
 }
