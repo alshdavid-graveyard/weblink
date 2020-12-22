@@ -74,7 +74,9 @@ const config = ({
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
     mainFields: ['module', 'main'],
-    alias: {}
+    alias: {
+      '@alshdavid/weblink': path.resolve(__dirname, '../weblink/src')
+    }
   },
 })
 
@@ -85,9 +87,9 @@ module.exports = [
     template: 'src/main/index.html',
     outputPath: [__dirname, 'build', 'main'],
   }),
-  // config({
-  //   entry: [__dirname, 'src', 'frame', 'index.tsx'],
-  //   template: 'src/frame/index.html',
-  //   outputPath: [__dirname, 'build', 'frame'],
-  // }),
+  config({
+    entry: [__dirname, 'src', 'frame', 'index.tsx'],
+    template: 'src/frame/index.html',
+    outputPath: [__dirname, 'build', 'frame'],
+  }),
 ]

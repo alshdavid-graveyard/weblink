@@ -1,5 +1,5 @@
 // @ts-ignore
-const ENVIRONMENT_IS_WORKER = typeof importScripts === 'function';
+export const ENVIRONMENT_IS_WORKER = typeof importScripts === 'function';
 const ENVIRONMENT_IS_WEB = typeof window === 'object';
 
 export const getSelf = (): Window => {
